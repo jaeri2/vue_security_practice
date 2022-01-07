@@ -11,6 +11,11 @@ export default {
   name: "SignUpPage",
   components: {
     Signup
+  },
+  data() {
+    return {
+
+    }
   }
 }
 </script>
