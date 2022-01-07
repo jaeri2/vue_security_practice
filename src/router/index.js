@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomePageView from "@/views/HomePageView";
-import LoginPageView from "@/views/LoginPageView";
-import RegistPageView from "@/views/RegistPageView";
 
 
 Vue.use(VueRouter);
@@ -13,18 +10,26 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: HomePageView
+            redirect: '/login',
         },
         {
-            path: '/login',
+            path: '/signup',
+            component: () => import('@/views/SignUpPage.vue'),
+        },
+        {
             name: 'login',
-            component: LoginPageView
+            path: '/login',
+            component: () => import('@/views/LoginPage.vue'),
         },
         {
-            path: '/regist',
-            name: 'regist',
-            component: RegistPageView
+            path: '/main',
+            component: () => import('@/views/MainPage.vue'),
+            meta: { auth:true },
+        },
+        {
+            path: '/forgot-password',
+            name: 'forgot-password',
+            component: () => import('../components/ForgotPassword.vue')
         }
     ]
 });

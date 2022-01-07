@@ -1,69 +1,30 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href class="navbar-brand" @click.prevent>bezKoder</a>
-      <div class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">
-            <font-awesome-icon icon="home" />Home
-          </router-link>
-        </li>
-<!--        <li v-if="showAdminBoard" class="nav-item">-->
-<!--          <router-link to="/admin" class="nav-link">Admin Board</router-link>-->
-<!--        </li>-->
-<!--        <li v-if="showModeratorBoard" class="nav-item">-->
-<!--          <router-link to="/mod" class="nav-link">Moderator Board</router-link>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>-->
-<!--        </li>-->
-      </div>
-
-      <div v-if="!currentUser" class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link to="/regist" class="nav-link">
-            <font-awesome-icon icon="user-plus" />Sign Up
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/login" class="nav-link">
-            <font-awesome-icon icon="sign-in-alt" />Login
-          </router-link>
-        </li>
-      </div>
-
-      <div v-if="currentUser" class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link to="/profile" class="nav-link">
-            <font-awesome-icon icon="user" />
-            {{ currentUser.username }}
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href @click.prevent="logOut">
-            <font-awesome-icon icon="sign-out-alt" />LogOut
-          </a>
-        </li>
+  <div class="vue-tempalte">
+    <!-- Navigation -->
+    <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
+      <div class="container">
+<!--        <a class="navbar-brand float-left" href="/" target="_blank">-->
+<!--          PINCAR-->
+<!--        </a>-->
+        <router-link class="nav-link pr-3" to="/" style="font-size: 24px; color: #000; font-weight: bold">PINCAR</router-link>
+        <ul class="nav navbar-nav flex-row float-right">
+          <li class="nav-item">
+            <router-link class="nav-link pr-3" to="/login" style="color: #000">로그인</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn" to="/signup" style="color: #000">회원가입</router-link>
+          </li>
+        </ul>
       </div>
     </nav>
-    <div class="container">
-      <router-view />
+
+    <!-- Main -->
+    <div class="App">
+      <div class="vertical-center">
+        <div class="inner-block">
+          <router-view />
+        </div>
+      </div>
     </div>
   </div>
 </template>
-
-<script>
-
-export default {
-  name: 'App',
-  data() {
-    return {
-      currentUser: ''
-    }
-  },
-}
-</script>
-
-<style>
-
-</style>
