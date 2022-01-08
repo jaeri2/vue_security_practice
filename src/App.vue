@@ -8,7 +8,12 @@
 <!--        </a>-->
         <router-link class="nav-link pr-3" to="/" style="font-size: 24px; color: #000; font-weight: bold">PINCAR</router-link>
         <ul class="nav navbar-nav flex-row float-right">
-          <template v-if="this.$route.name == 'main'">
+          <template v-if="this.$route.name == 'main' && this.$route.query.username != 'admin@admin.com'">
+            <p style="margin-right: 20px; font-weight: bold; color: #B4B9C3">{{ this.$route.query.username }} <i class="fa fa-bell" aria-hidden="true" style="color:#000"></i></p>
+            <a href="javascript:;" @click="logoutUser" class="logout-button" style="color: #000">로그아웃</a>
+          </template>
+          <template v-else-if="this.$route.name == 'main' && this.$route.query.username == 'admin@admin.com'">
+            <p style="margin-right: 20px; font-weight: bold; color: #000">관리자 <i class="fa fa-lock" aria-hidden="true"></i></p>
             <a href="javascript:;" @click="logoutUser" class="logout-button" style="color: #000">로그아웃</a>
           </template>
           <template v-else>
@@ -47,6 +52,9 @@ export default {
       return this.$store.getters.isLogin ? '/main' : '/login';
     }
   },
+  // created() {
+  //   console.log(this.$route.query.username);
+  // },
   methods: {
     logoutUser() {
       if(confirm('로그아웃을 진행할까요?')) {

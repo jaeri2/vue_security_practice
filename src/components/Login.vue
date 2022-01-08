@@ -58,18 +58,22 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const admin = "admin@admin.com"
         console.log(userData);
         console.log('여까지 오자');
         const response = await loginUser(userData);
         console.log(response.data);
         console.log(response.status);
         //await this.$store.dispatch('LOGIN', userData);
+        const email = this.username;
         console.log('test');
-        alert('환영합니다.');
+        if( email == "admin@admin.com") {
+          alert('관리자.');
+        } else {
+          alert(email+'님, 환영합니다.');
+        }
         // this.logMessage = `${response.data.username}님이 로그인하셨습니다.`
         this.initForm();
-        this.$router.push('/main');
+        this.$router.push({name: 'main', query: {username: email}});
       } catch (e) {
         alert('회원이 아닙니다.');
         console.log(e)

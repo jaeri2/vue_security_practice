@@ -29,20 +29,20 @@ export default {
   // },
   data() {
     return {
-      postItems: [],
+      // postItems: [],
       isLoading: false,
     };
   },
   methods: {
-    async fetchData() {
-      this.isLoading = true;
-      const { data } = await fetchPosts();
-      this.isLoading = false;
-      this.postItems = data.posts;
-    },
+    // async fetchData() {
+    //   this.isLoading = true;
+    //   const { data } = await fetchPosts();
+    //   this.isLoading = false;
+    //   this.postItems = data.posts;
+    // },
   },
   created() {
-    this.fetchData();
+    // this.fetchData();
   },
 };
 </script>
