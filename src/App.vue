@@ -49,11 +49,13 @@ export default {
   },
   methods: {
     logoutUser() {
-      this.$store.commit('clearUsername');
-      this.$store.commit('clearToken');
-      // deleteCookie('til_auth');
-      // deleteCookie('til_user');
-      this.$router.push('/login');
+      if(confirm('로그아웃을 진행할까요?')) {
+        this.$store.commit('clearUsername');
+        this.$store.commit('clearToken');
+        // deleteCookie('til_auth');
+        // deleteCookie('til_user');
+        this.$router.push('/login');
+      } else {}
     },
   }
 };

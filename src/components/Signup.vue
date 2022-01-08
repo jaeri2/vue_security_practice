@@ -18,7 +18,7 @@
         <input type="text" class="form-control form-control-lg" v-model="nickname"/>
       </div>
 
-      <button type="submit" class="btn btn-success btn-lg btn-block">회원가입</button>
+      <button type="submit" class="btn btn-success btn-lg btn-block" v-bind:disabled="!isUsernameValid || !password || !nickname">회원가입</button>
       <p class="log" style="margin-top: 10px; color: #36C4D0;">{{ logMessage }}</p>
 
       <p class="forgot-password text-right">
@@ -31,6 +31,7 @@
 
 <script>
 import { registerUser } from '@/api/auth';
+import { validateEmail } from '@/utils/validation';
 
 export default {
   data() {
@@ -40,6 +41,11 @@ export default {
       nickname: '',
       logMessage: ''
     }
+  },
+  computed: {
+    isUsernameValid() {
+      return validateEmail(this.username);
+    },
   },
   methods: {
     async Onsubmit() {
@@ -53,6 +59,8 @@ export default {
       const response = await registerUser(userData);
       console.log(response.data.username);
       this.logMessage = `${response.data.username}님이 가입되었습니다.`
+      alert('회원가입이 완료되었습니다.');
+      this.$router.push('/login');
       this.initForm();
     },
     initForm() {

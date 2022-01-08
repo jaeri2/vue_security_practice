@@ -13,7 +13,7 @@
         <input type="password" class="form-control form-control-lg" v-model="password" />
       </div>
 
-      <button type="submit" class="btn btn-success btn-lg btn-block">로그인</button>
+      <button type="submit" class="btn btn-success btn-lg btn-block" v-bind:disabled="!isUsernameValid || !password">로그인</button>
       <p class="log" style="margin-top: 10px; color: #36C4D0;">{{ logMessage }}</p>
 
       <p class="forgot-password text-right mt-2 mb-4">
@@ -35,6 +35,7 @@
 
 <script>
 import {loginUser, registerUser} from "@/api/auth";
+import { validateEmail } from '@/utils/validation';
 
 export default {
   data() {
@@ -44,6 +45,11 @@ export default {
       logMessage: ''
     }
   },
+  computed: {
+    isUsernameValid() {
+      return validateEmail(this.username);
+    },
+  },
   methods: {
     async onSubmit() {
       try {
@@ -52,6 +58,7 @@ export default {
           username: this.username,
           password: this.password,
         };
+        const admin = "admin@admin.com"
         console.log(userData);
         console.log('여까지 오자');
         const response = await loginUser(userData);
@@ -59,7 +66,7 @@ export default {
         console.log(response.status);
         //await this.$store.dispatch('LOGIN', userData);
         console.log('test');
-        alert("환영합니다!");
+        alert('환영합니다.');
         // this.logMessage = `${response.data.username}님이 로그인하셨습니다.`
         this.initForm();
         this.$router.push('/main');
