@@ -3,7 +3,7 @@
 }
 
 body {
-    background: linear-gradient(to top, #37ecba 0%, #72afd3 100%) !important;
+    background: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%) !important;
     min-height: 100vh;
     display: flex;
     font-weight: 400;

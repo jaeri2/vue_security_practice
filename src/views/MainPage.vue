@@ -1,23 +1,50 @@
 <template>
-  <div class="container">
-<!--    <header class="jumbotron">-->
-<!--      <h3>{{content}}</h3>-->
-<!--    </header>-->
-    Home
+  <div>
+    <div class="main list-container contents">
+      <h1 class="page-header">메인페이지</h1>
+<!--      <LoadingSpinner v-if="isLoading"></LoadingSpinner>-->
+<!--      <ul v-else>-->
+<!--        <PostListItem-->
+<!--            v-for="postItem in postItems"-->
+<!--            :key="postItem._id"-->
+<!--            :postItem="postItem"-->
+<!--            @refresh="fetchData"-->
+<!--        ></PostListItem>-->
+<!--      </ul>-->
+    </div>
+    <router-link to="/add" class="create-button">
+      <ion-icon name="add-outline"></ion-icon>
+    </router-link>
   </div>
 </template>
 
 <script>
+// import PostListItem from '@/components/posts/PostListItem.vue';
+// import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
+import { fetchPosts } from '@/api/posts';
 export default {
-  name: "MainPage",
+  // components: {
+  //   PostListItem,
+  //   LoadingSpinner,
+  // },
   data() {
     return {
-      content: ''
-    }
-  }
-}
+      postItems: [],
+      isLoading: false,
+    };
+  },
+  methods: {
+    async fetchData() {
+      this.isLoading = true;
+      const { data } = await fetchPosts();
+      this.isLoading = false;
+      this.postItems = data.posts;
+    },
+  },
+  created() {
+    this.fetchData();
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

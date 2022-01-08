@@ -1,22 +1,23 @@
 <template>
   <div class="vue-tempalte">
-    <form>
+    <form @submit.prevent="onSubmit">
       <h3>로그인</h3>
 
       <div class="form-group">
         <label>이메일</label>
-        <input type="email" class="form-control form-control-lg" />
+        <input type="email" class="form-control form-control-lg" v-model="username" />
       </div>
 
       <div class="form-group">
         <label>비밀번호</label>
-        <input type="password" class="form-control form-control-lg" />
+        <input type="password" class="form-control form-control-lg" v-model="password" />
       </div>
 
       <button type="submit" class="btn btn-success btn-lg btn-block">로그인</button>
+      <p class="log" style="margin-top: 10px; color: #36C4D0;">{{ logMessage }}</p>
 
       <p class="forgot-password text-right mt-2 mb-4">
-        <router-link to="/forgot-password" style="margin-right: 10px">비밀번호를 잊어버리셨습니까?</router-link>
+        <router-link to="/forgot-password" style="margin-right: 10px">비밀번호를 잊어버리셨습니까?</router-link><span style="margin-right: 8px">|</span>
         <router-link to="/signup">회원이 아니신가요?</router-link>
       </p>
 
@@ -33,9 +34,49 @@
 </template>
 
 <script>
+import {loginUser, registerUser} from "@/api/auth";
+
 export default {
   data() {
-    return {}
+    return {
+      username: '',
+      password: '',
+      logMessage: ''
+    }
+  },
+  methods: {
+    async onSubmit() {
+      try {
+
+        const userData = {
+          username: this.username,
+          password: this.password,
+        };
+        console.log(userData);
+        console.log('여까지 오자');
+        const response = await loginUser(userData);
+        console.log(response.data);
+        console.log(response.status);
+        //await this.$store.dispatch('LOGIN', userData);
+        console.log('test');
+        alert("환영합니다!");
+        // this.logMessage = `${response.data.username}님이 로그인하셨습니다.`
+        this.initForm();
+        this.$router.push('/main');
+      } catch (e) {
+        alert('회원이 아닙니다.');
+        console.log(e)
+        this.$router.push('/signup');
+        console.log(e);
+      } finally {
+        this.initForm();
+      }
+    },
+    initForm() {
+      this.username = '',
+          this.password = '',
+          this.nickname = ''
+    }
   }
 }
 </script>
