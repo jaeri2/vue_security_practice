@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="main list-container contents">
-      <h1 class="page-header">메인페이지</h1>
+      <template v-if="this.$route.query.username == 'admin@admin.com'">
+        <h1 class="page-header">관리자 페이지</h1>
+      </template>
+      <template v-else>
+        <h1 class="page-header">회원전용 페이지</h1>
+      </template>
 <!--      <LoadingSpinner v-if="isLoading"></LoadingSpinner>-->
 <!--      <ul v-else>-->
 <!--        <PostListItem-->
