@@ -67,7 +67,7 @@ export default {
         const email = this.username;
         console.log('test');
         if( email == "admin@admin.com") {
-          alert('관리자.');
+          alert('관리자페이지로 이동합니다.');
         } else {
           alert(email+'님, 환영합니다.');
         }
